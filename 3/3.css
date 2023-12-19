@@ -13,6 +13,7 @@ body {
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 #second {
@@ -35,5 +36,15 @@ body {
     align-self: center;
     max-width: 170px;
     max-height: 170px;
+    opacity: 0;
+}
+
+#fifth {
+    position: absolute;
+    left: -5%;
+    top: 5%;
+    align-self: flex-start;
+    color: hwb(202 25% 17%);
+    transform: rotate(-30deg);
     visibility: hidden;
 }
