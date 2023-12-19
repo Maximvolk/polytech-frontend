@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Cinzel:400,700,900|Lato:100,300,400,700,900|Lobster|Lora:400,700|Mansalva|Muli:200,300,400,600,700,800,900|Open+Sans:300,400,600,700,800|Oswald:200,300,400,500,600,700|Roboto:100,300,400,500,700,900&display=swap');
+
+.box {
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.innerBox {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+    flex-basis: 40px;
+}
+
+.class1 {
+    background: #05b49d;
+    padding: 0;
+    margin: 0;
+}
+
+.class2 {
+    background: #dd94c1;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #f2f2f2;
+    background: #333;
+}
