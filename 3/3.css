@@ -13,26 +13,27 @@ body {
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
-    flex-direction: column;
-}
-
-#first {
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 #second {
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    align-self: flex-start;
+    color: #f70505;
+    visibility: hidden;
 }
 
 #third {
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    align-self: center;
+    max-width: 170px;
+    max-height: 170px;
+    visibility: hidden;
+}
+
+#fourth {
+    position: absolute;
+    align-self: center;
+    max-width: 170px;
+    max-height: 170px;
+    visibility: hidden;
 }

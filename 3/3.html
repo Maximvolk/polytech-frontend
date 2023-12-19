@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="3.css">
+    <script src="3.js"></script>
 </head>
 
 <body>
 
-    <div class="box">
+    <div class="box" onmouseenter="appear()" onmouseleave="disappear()" onmousedown="appearAndShake()" onmouseup="disappear()">
         <img id="first" src="images/avto1.jpg">
-        <img id="second" src="images/avto2.png">
-        <img id="third" src="images/avto3.png">
+        <p id="second"><strong>Автомойка "Чистюля"</strong></p>
+        <img id="third" src="images/avto2.png">
+        <img id="fourth" src="images/avto3.png">
     </div>
 
 </body>
