@@ -37,16 +37,8 @@ body {
     padding-left: 10px;
 }
 
-.content {
-    font-family: 'Lora', sans-serif;
-    font-weight: 300;
-    font-size: 30px;
+iframe {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    color: #333;
 }
 
 footer {
