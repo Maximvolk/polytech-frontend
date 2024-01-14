@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="5.css">
+    <script src="5.js"></script>
+  </head>
+  <body ondrop="drop(event)">
+    <div id="text">Разделить по признаку, компоновать в разных местах</div>
+
+    <img id="cat" draggable="true" src="images/cat.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+    <img id="dog" draggable="true" src="images/dog.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+    <img id="dragonfly" draggable="true" src="images/dragonfly.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+    <img id="hen" draggable="true" src="images/hen.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+    <img id="ladybug" draggable="true" src="images/ladybug.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+    <img id="grasshopper" draggable="true" src="images/grasshopper.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+    <img id="parrot" draggable="true" src="images/parrot.png" ondragover="allowDrop(event)"
+        onmousedown="processDragNDrop(event, this)" ondragstart="avoidDefault(event)">
+  </body>
+</html>

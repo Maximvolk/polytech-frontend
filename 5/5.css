@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Cinzel:400,700,900|Lato:100,300,400,700,900|Lobster|Lora:400,700|Mansalva|Muli:200,300,400,600,700,800,900|Open+Sans:300,400,600,700,800|Oswald:200,300,400,500,600,700|Roboto:100,300,400,500,700,900&display=swap');
+
+#text {
+    font-family: 'Lora', sans-serif;
+    font-size: 20px;
+    top: 10%;
+    text-align: center;
+}
+
+#cat {
+    position: absolute;
+    left: 10em;
+    top: 10em;
+}
+
+#dog {
+    position: absolute;
+    left: 17em;
+    top: 25em;
+}
+
+#ladybug {
+    position: absolute;
+    right: 10em;
+    top: 10em;
+}
+
+#dragonfly {
+    position: absolute;
+    right: 25em;
+    top: 5em;
+}
+
+#grasshopper {
+    position: absolute;
+    left: 30em;
+    top: 10em;
+}
+
+#hen {
+    position: absolute;
+    left: 5em;
+    top: 20em;
+}
+
+#parrot {
+    position: absolute;
+    right: 20em;
+    top: 20em;
+}
