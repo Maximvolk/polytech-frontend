@@ -8,10 +8,24 @@ function processDragNDrop(e, element) {
     var shiftY = e.pageY - coords.top;
   
     moveAt(e);
-  
+    element.style.zIndex = 100;
+
     function moveAt(e) {
-        element.style.left = e.pageX - shiftX + 'px';
-        element.style.top = e.pageY - shiftY + 'px';
+        var newLeft = e.pageX - shiftX; 
+        var newTop = e.pageY - shiftY;
+
+        if (newLeft < 0)
+            newLeft = 0;
+        else if (newLeft + element.clientWidth > document.documentElement.clientWidth)
+            newLeft = document.documentElement.clientWidth - element.clientWidth;
+
+        if (newTop < 0)
+            newTop = 0;
+        else if (newTop + element.clientHeight > document.documentElement.clientHeight)
+            newTop = document.documentElement.clientHeight - element.clientHeight; 
+
+        element.style.left = newLeft + 'px';
+        element.style.top = newTop + 'px';
     }
   
     document.onmousemove = function(e) {
@@ -19,6 +33,8 @@ function processDragNDrop(e, element) {
     };
   
     element.onmouseup = function() {
+        element.style.zIndex = 0;
+
         document.onmousemove = null;
         element.onmouseup = null;
 
@@ -40,19 +56,28 @@ function getCoords(element) {
 }
 
 function checkGroupedCorrectly() {
-    for (var group of getImagesGroups()) {
-        for (var i = 0; i < group.length - 1; i++) {
-            for (var j = i + 1; j < group.length; j++) {
-                var firstRect = getCoords(group[i]);
-                var secondRect = getCoords(group[j]);
-                
-                console.log(firstRect.left - secondRect.left);
-                if (Math.abs(firstRect.left - secondRect.left) > 15)
-                    return false;
+    var groups = getImagesGroups();
 
-                if (Math.abs(firstRect.top - secondRect.top) > 15)
+    for (var group of groups) {
+        for (var i = 0; i < group.length - 1; i++) {
+            for (var j = i + 1; j < group.length; j++) { 
+                var firstCoords = getElementCenterCoords(group[i]);
+                var secondCoords = getElementCenterCoords(group[j]);
+
+                if (getDistance(firstCoords, secondCoords) > 150)
                     return false;
             }
+        }
+    }
+
+    var groupCentersCoords = [];
+    for (var i = 0; i < groups.length; i++)
+        groupCentersCoords[i] = getGroupCenterCoords(groups[i]);
+
+    for (var i = 0; i < groups.length - 1; i++) {
+        for (var j = i + 1; j < groups.length; j++) {             
+            if (getDistance(groupCentersCoords[i], groupCentersCoords[j]) < 300)
+                return false;
         }
     }
 
@@ -73,10 +98,32 @@ function getImagesGroups() {
     return [[cat, dog], [hen, parrot], [dragonfly, grasshopper, ladybug]];
 }
 
-function getDistance(firstOffset, secondOffset) {
-    console.log(firstOffset);
-    var first = Number(firstOffset.slice(0, -2));
-    var second = Number(secondOffset.slice(0, -2));
+function getGroupCenterCoords(group) {
+    var x = 0;
+    var y = 0;
 
-    return Math.abs(first - second);
+    for (var i = 0; i < group.length; i++)
+    {
+        var centerCoords = getElementCenterCoords(group[i]);
+        x += centerCoords.x;
+        y += centerCoords.y;
+    }
+
+    return {
+        x: x / group.length,
+        y: y / group.length
+    }
+}
+
+function getDistance(firstCoords, secondCoords) {
+    return Math.sqrt(Math.pow(firstCoords.x - secondCoords.x, 2) + Math.pow(firstCoords.y - secondCoords.y, 2));
+}
+
+function getElementCenterCoords(element) {
+    var rect = getCoords(element);
+
+    return {
+        x: rect.left + element.clientWidth / 2,
+        y: rect.top + element.clientHeight / 2,
+    };
 }
