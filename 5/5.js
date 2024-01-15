@@ -39,7 +39,7 @@ function processDragNDrop(e, element) {
         element.onmouseup = null;
 
         if (checkGroupedCorrectly())
-            alert("Correct!");
+            setAnimation();
     };
 }
   
@@ -126,4 +126,12 @@ function getElementCenterCoords(element) {
         x: rect.left + element.clientWidth / 2,
         y: rect.top + element.clientHeight / 2,
     };
+}
+
+function setAnimation() {
+    for (var element of document.getElementsByTagName("img"))
+    {
+        element.className = "animated";
+        element.onanimationend = function(e) { e.target.className = null; }
+    }
 }
