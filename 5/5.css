@@ -11,42 +11,49 @@
     position: absolute;
     left: 10em;
     top: 10em;
+    rotate: -10deg;
 }
 
 #dog {
     position: absolute;
     left: 17em;
     top: 25em;
+    rotate: 30deg;
 }
 
 #ladybug {
     position: absolute;
     right: 10em;
     top: 10em;
+    rotate: 45deg;
 }
 
 #dragonfly {
     position: absolute;
     right: 25em;
     top: 5em;
+    rotate: -60deg;
 }
 
 #grasshopper {
     position: absolute;
     left: 30em;
     top: 10em;
+    rotate: 80deg;
 }
 
 #hen {
     position: absolute;
     left: 5em;
     top: 20em;
+    rotate: 15deg;
 }
 
 #parrot {
     position: absolute;
     right: 20em;
     top: 20em;
+    rotate: 180deg;
 }
 
 .animated {
@@ -57,14 +64,14 @@
 
 @keyframes grow-and-shrink {
     0% {
-        transform: scale(1);
+        scale: 1;
     }
 
     50% {
-        transform: scale(1.5);
+        scale: 1.5;
     }
 
     100% {
-        transform: scale(1);
+        scaele: 1;
     }
 }

@@ -1,14 +1,51 @@
+var rotationModeEnabled = false;
+
 function allowDrop(e) {
     e.preventDefault();
 }
 
-function processDragNDrop(e, element) {
+function setRotationMode(e, active) {
+    if (e.key == "r" || e.key == "к")
+        rotationModeEnabled = active;
+}
+
+function processMouseDown(e, element) {
     var coords = getCoords(element);
     var shiftX = e.pageX - coords.left;
     var shiftY = e.pageY - coords.top;
-  
-    moveAt(e);
+
     element.style.zIndex = 100;
+
+    if (rotationModeEnabled)
+    {
+        var previousAngle = Number(element.style.rotate.replace("deg", ""));
+        rotateElement(element, e.pageY, previousAngle);
+    }
+    else
+        processDragNDrop(e, element, shiftX, shiftY);
+}
+
+function rotateElement(element, initialY, initialAngle) {
+    function rotate(e) {
+        var angle = initialAngle + (e.pageY - initialY);
+        element.style.rotate =  angle + "deg";
+    }
+
+    document.onmousemove = function(e) {
+        rotate(e);
+    };
+  
+    document.onmouseup = function() {
+        console.log(getCoords(element));
+        element.style.zIndex = 0;
+
+        document.onmousemove = null;
+        document.onmouseup = null;
+    };
+}
+
+function processDragNDrop(e, element, shiftX, shiftY) {  
+    moveAt(e);
 
     function moveAt(e) {
         var newLeft = e.pageX - shiftX; 
@@ -32,11 +69,11 @@ function processDragNDrop(e, element) {
         moveAt(e);
     };
   
-    element.onmouseup = function() {
+    document.onmouseup = function() {
         element.style.zIndex = 0;
 
         document.onmousemove = null;
-        element.onmouseup = null;
+        document.onmouseup = null;
 
         if (checkGroupedCorrectly())
             setAnimation();
