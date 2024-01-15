@@ -18,7 +18,7 @@ function processMouseDown(e, element) {
 
     if (rotationModeEnabled)
     {
-        var previousAngle = Number(element.style.rotate.replace("deg", ""));
+        var previousAngle = Number(getComputedStyle(element).rotate.replace("deg", ""));
         rotateElement(element, e.pageY, previousAngle);
     }
     else
