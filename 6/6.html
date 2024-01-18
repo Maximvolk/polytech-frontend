@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/6.css">
+        <link rel="stylesheet" href="styles/game_1.css">
+        <link rel="stylesheet" href="styles/game_2.css">
+        <link rel="stylesheet" href="styles/game_3.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="scripts/common.js"></script>
+        <script src="scripts/6.js"></script>
+        <script src="scripts/game_1.js"></script>
+        <script src="scripts/game_2.js"></script>
+        <script src="scripts/game_3.js"></script>
+    </head>
+    <body>
+        <button id="back-to-menu" onclick="setPage('menu')">Завершить</button>
+        <div class="page" id="login">
+            <div id="login-box">
+                <h1 class="centered-title">Введите имя</h1>
+                <input id="username" type="text" onkeyup="checkInputIsNotEmpty(this)">
+                <button id="login-button" class="menu-button" onclick="login()" disabled>Войти</button>
+            </div>
+        </div>
+
+        <div class="page" id="menu">
+            <div id="menu-box">
+                <button class="menu-button" onclick="setPage('game1')">Играть</button>
+                <button class="menu-button" onclick="setPage('stats')">Рекорды</button>
+                <button class="menu-button" onclick="setPage('login')">Выйти</button>
+                <fieldset>
+                    <legend>Выберите уровень сложности:</legend>
+                    <div>
+                    <input type="radio" id="easy" name="difficulty" value="easy" />
+                    <label for="easy">Легкий</label>
+                    </div>
+                
+                    <div>
+                    <input type="radio" id="medium" name="difficulty" value="medium" />
+                    <label for="medium">Средний</label>
+                    </div>
+                
+                    <div>
+                    <input type="radio" id="hard" name="difficulty" value="hard" />
+                    <label for="hard">Тяжелый</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="page" id="stats">
+            <div id="stats-box">
+                <h1 class="centered-title">Лучшие результаты</h1>
+                <table id="records-table">
+                    <thead>
+                        <tr>
+                            <th>Имя пользователя</th>
+                            <th>Сумма очков</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="page" id="game1">
+            <div id="game1-box">
+                <h1 class="centered-title" id="game1-title">Hey there</h1>
+                <div id="coloured-words">
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                    <button>Button</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="game2">
+            
+        </div>
+
+        <div class="page" id="game3">
+            
+        </div>
+    </body>
+</html>

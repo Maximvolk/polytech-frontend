@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Cinzel:400,700,900|Lato:100,300,400,700,900|Lobster|Lora:400,700|Mansalva|Muli:200,300,400,600,700,800,900|Open+Sans:300,400,600,700,800|Oswald:200,300,400,500,600,700|Roboto:100,300,400,500,700,900&display=swap');
+
+html {
+    font-family: 'Lora', sans-serif;
+}
+
+button {
+    font-family: 'Lora', sans-serif;
+}
+
+input {
+    height: 25px;
+}
+
+.menu-button {
+    height: 30px;
+}
+
+.centered-title {
+    text-align: center;
+}
+
+#login-box {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+#login, #menu, #stats, #game1, #game2, #game3 {
+    display: none;
+}
+
+#menu-box {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+#stats-box {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    max-width: 400px;
+    max-height: 900px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+#back-to-menu {
+    position: absolute;
+    left: 3%;
+    top: 4%;
+    height: 40px;
+}
