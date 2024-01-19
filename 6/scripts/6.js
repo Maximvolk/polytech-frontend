@@ -1,3 +1,11 @@
+function launchGame() {
+    var state = getState();
+    setPage(`game${state.currentGameNumber}`);
+
+    if (state.currentGameNumber === 1)
+        launchFirstGame();
+}
+
 function setPage(pageId) {
     var state = getState();
     
@@ -62,7 +70,12 @@ $(document).ready(function() {
         setPage("login");
     }
     else
-        setPage(state.currentPage);
+    {
+        if (state.currentPage.includes("game"))
+            launchGame();
+        else
+            setPage(state.currentPage);
+    }
 
     $("#" + state.difficulty).prop("checked", true);
 
@@ -73,4 +86,8 @@ $(document).ready(function() {
         $("#" + state.difficulty).prop("checked", true);
         setState(state);
     });
+
+    var stats = getStats();
+    if (stats == null)
+        setStats({});
 })
