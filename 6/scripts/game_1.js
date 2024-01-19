@@ -4,9 +4,16 @@ var words = [
 ]
 
 var colours = [
-    "blue", "red", "yellow", "green", "darkorange", "sienna", "purple", "bisque",
-    "grey", "aquamarine", "firebrick", "deppink", "lime"
+    "blue", "red", "yellow", "green", "darkorange", "sienna",
+    "purple", "bisque", "grey", "aquamarine", "firebrick", "deeppink", "lime"
 ]
+// var words = [
+//     "Синий",
+// ]
+
+// var colours = [
+//     "blue", "yellow"
+// ]
 
 var timeout = null;
 var correctCount = 0;
@@ -137,6 +144,7 @@ async function launchFirstGameAsync() {
         secondsToFinish = 20;
 
     timeout = setTimeout(() => {
+        $("#timer").css("display", "none");
         openModal("Время вышло. Попробуйте еще раз", false);
     }, secondsToFinish * 1000);
 

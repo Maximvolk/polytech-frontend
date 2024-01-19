@@ -78,6 +78,16 @@ async function nextGameAsync() {
     await launchGameAsync();
 }
 
+function backToMenu() {
+    if (getState().currentPage === "game1")
+        stopTimer();
+
+    if (timeout != null)
+        clearTimeout(timeout);
+
+    setPage('menu');
+}
+
 $(document).ready(async function() {
     document.getElementById("modal-restart").addEventListener("click", async () => {
         var state = getState();

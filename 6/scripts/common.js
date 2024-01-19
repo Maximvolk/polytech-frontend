@@ -1,5 +1,4 @@
-
-var stopTimer = false;
+var timerStopRequested = false;
 
 function setState(state) {
     window.localStorage.setItem("state", JSON.stringify(state));
@@ -42,13 +41,23 @@ async function launchTimerAsync(seconds) {
     $("#timer").text(seconds);
     $("#timer").css("visibility", true);
 
-    while (seconds > 0 && !stopTimer)
+    while (seconds > 0 && !timerStopRequested)
     {
         await sleep(1000);
         
+        if (timerStopRequested)
+            break;
+
         seconds--;
         $("#timer").html(seconds);
     }
+
+    if (timerStopRequested)
+        timerStopRequested = false;
+}
+
+function stopTimer() {
+    timerStopRequested = true;
 }
 
 function sleep(ms) {
@@ -56,6 +65,7 @@ function sleep(ms) {
 }
 
 function openModal(text, allowNext) {
+    stopTimer();
     var state = getState();
 
     if (!allowNext || state.currentGameNumber === 3)
