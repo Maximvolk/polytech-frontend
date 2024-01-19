@@ -1,9 +1,10 @@
-function launchGame() {
+async function launchGameAsync() {
+    closeModal();
     var state = getState();
     setPage(`game${state.currentGameNumber}`);
 
     if (state.currentGameNumber === 1)
-        launchFirstGame();
+        await launchFirstGameAsync();
 }
 
 function setPage(pageId) {
@@ -24,6 +25,9 @@ function setPage(pageId) {
 
     if (pageId === "login")
         state = resetStateAndChoosedOptions();
+
+    if (pageId != "game1")
+        $("#timer").css("display", "none");
 
     setState(state);
 }
@@ -56,7 +60,41 @@ function checkInputIsNotEmpty(element) {
         $("#login-button").prop("disabled", false);
 }
 
-$(document).ready(function() {
+function backFromModal() {
+    closeModal();
+    setPage("menu");
+}
+
+async function restartGameAsync() {
+    closeModal();
+    await launchGameAsync();
+}
+
+async function nextGameAsync() {
+    var state = getState();
+    state.currentGameNumber++;
+    setState(state);
+
+    await launchGameAsync();
+}
+
+$(document).ready(async function() {
+    document.getElementById("modal-restart").addEventListener("click", async () => {
+        var state = getState();
+        state.points -= state.lastTimePointsAdded;
+        setState(state);
+
+        await restartGameAsync();
+    })
+    document.getElementById("modal-next").addEventListener("click", async () => {
+        var state = getState();
+        state.currentGameNumber++;
+        setState();
+        
+        await launchGameAsync();
+    })
+    document.getElementById("start-game").addEventListener("click", async () => { await launchGameAsync(); })
+
     var state = getState();
 
     if (state == null) {
@@ -72,7 +110,7 @@ $(document).ready(function() {
     else
     {
         if (state.currentPage.includes("game"))
-            launchGame();
+            await launchGameAsync();
         else
             setPage(state.currentPage);
     }

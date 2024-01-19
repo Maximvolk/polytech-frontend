@@ -18,9 +18,9 @@
         <div id="timer"></div>
 
         <div id="modal">
-            <div id="modal-text"><h1>Some text</h1></div>
+            <div id="modal-text"></div>
             <div id="modal-button-box">
-                <button class="modal-button" id="modal-back">В меню</button>
+                <button class="modal-button" id="modal-back" onclick="backFromModal()">В меню</button>
                 <button class="modal-button" id="modal-restart">Заново</button>
                 <button class="modal-button" id="modal-next">Далее</button>
             </div>
@@ -36,7 +36,7 @@
 
         <div class="page" id="menu">
             <div id="menu-box">
-                <button class="menu-button" onclick="launchGame()">Играть</button>
+                <button id="start-game" class="menu-button">Играть</button>
                 <button class="menu-button" onclick="setPage('stats')">Рекорды</button>
                 <button class="menu-button" onclick="setPage('login')">Выйти</button>
                 <fieldset>

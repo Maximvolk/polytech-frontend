@@ -1,4 +1,5 @@
-var secondsLeft = 0;
+
+var stopTimer = false;
 
 function setState(state) {
     window.localStorage.setItem("state", JSON.stringify(state));
@@ -13,7 +14,9 @@ function getDefaultState() {
         username: null,
         currentPage: "login",
         difficulty: "medium",
-        currentGameNumber: 1
+        currentGameNumber: 1,
+        points: 0,
+        lastTimePointsAdded: 0
     };
 }
 
@@ -35,21 +38,51 @@ function uuidv4() {
     );
 }
 
-function launchTimer(seconds) {
-    secondsLeft = seconds;
-
-    $("#timer").text(secondsLeft);
+async function launchTimerAsync(seconds) {
+    $("#timer").text(seconds);
     $("#timer").css("visibility", true);
 
-    while (secondsLeft > 0)
+    while (seconds > 0 && !stopTimer)
     {
-        setTimeout(() => {
-            secondsLeft--;
-            $("#timer").text(secondsLeft);
-        }, 1000);
+        await sleep(1000);
+        
+        seconds--;
+        $("#timer").html(seconds);
     }
 }
 
-function createModal(text, allowNext) {
-    
+function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
+}
+
+function openModal(text, allowNext) {
+    var state = getState();
+
+    if (!allowNext || state.currentGameNumber === 3)
+        $("#modal-next").css("display", "none");
+
+    $("#modal-text").html("<h1>" + text + "</h1>");
+    $("#modal").css("display", "block");
+}
+
+function closeModal() {
+    $("#modal").css("display", "none");
+}
+
+function updateStats(points = null) {
+    var state = getState();
+    var stats = getStats();
+
+    if (points == null)
+        points = state.points
+
+    if (!(state.username in stats))
+        stats.username = points;
+    else
+    {
+        if (state.points > stats.username)
+            stats.username = points;
+    }
+
+    setStats(stats);
 }

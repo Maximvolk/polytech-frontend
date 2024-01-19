@@ -8,6 +8,7 @@ var colours = [
     "grey", "aquamarine", "firebrick", "deppink", "lime"
 ]
 
+var timeout = null;
 var correctCount = 0;
 
 function fillWordsButtons() {
@@ -89,21 +90,39 @@ function checkDraggedCorrectly(button) {
 }
 
 function notifyAboutResults() {
+    clearTimeout(timeout);
     var correctCountNeeded = words.length;
 
-    var difficulty = getState().difficulty;
+    var state = getState()
+    var difficulty = state.difficulty;
+
     if (difficulty === "easy")
         correctCountNeeded -= 2;
     else if (difficulty === "medium")
         correctCountNeeded -= 1;
 
+    var result = "Неправильно. Попробуйте еще раз";
+    var allowNext = false;
+
     if (correctCount >= correctCountNeeded)
-        alert("You won!");
-    else
-        alert(`You lost(`);
+    {
+        allowNext = true;
+
+        state.lastTimePointsAdded += correctCount;
+        state.points += correctCount;
+        setState(state);
+
+        result = `Правильно! У вас ${correctCount} очков за уровень и ${state.points} очков всего`;
+        updateStats();
+    }
+
+    openModal(result, allowNext);
 }
 
-function launchFirstGame() {
+async function launchFirstGameAsync() {
+    $("#timer").css("display", "block");
+    updateStats(0);
+
     correctCount = 0;
     fillWordsButtons();
 
@@ -111,15 +130,15 @@ function launchFirstGame() {
     var difficulty = getState().difficulty;
 
     if (difficulty === "easy")
-        secondsToFinish = 30;
+        secondsToFinish = 59;
     else if (difficulty === "medium")
-        secondsToFinish = 20;
+        secondsToFinish = 40;
     else
-        secondsToFinish = 10;
+        secondsToFinish = 20;
 
-    setTimeout(() => {
-        notifyAboutResults();
+    timeout = setTimeout(() => {
+        openModal("Время вышло. Попробуйте еще раз", false);
     }, secondsToFinish * 1000);
 
-    launchTimer(secondsLeft);
+    await launchTimerAsync(secondsToFinish);
 }
