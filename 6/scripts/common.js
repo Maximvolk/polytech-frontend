@@ -68,8 +68,11 @@ function openModal(text, allowNext) {
     stopTimer();
     var state = getState();
 
+    console.log(!allowNext || state.currentGameNumber === 3);
     if (!allowNext || state.currentGameNumber === 3)
         $("#modal-next").css("display", "none");
+    else
+        $("#modal-next").css("display", "block");
 
     $("#modal-text").html("<h1>" + text + "</h1>");
     $("#modal").css("display", "block");

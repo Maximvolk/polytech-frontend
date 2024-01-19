@@ -16,10 +16,10 @@ var colours = [
 // ]
 
 var timeout = null;
-var correctCount = 0;
+var incorrectCount = 0;
 
 function fillWordsButtons() {
-    correctCount = 0;
+    incorrectCount = 0;
     var colouredWordsBox = document.getElementById("coloured-words");
 
     if (colouredWordsBox.hasChildNodes())
@@ -85,41 +85,48 @@ function drop(e, boxType) {
     var colouredWordsBox = document.getElementById("coloured-words");
     colouredWordsBox.removeChild(button);
 
-    if (boxType === checkDraggedCorrectly(button))
-        correctCount++;
+    if (boxType != checkDraggedCorrectly(button))
+        incorrectCount++;
+
+    if (incorrectCount > getAllowedErrorsCount())
+        finish(false);
 
     if (!colouredWordsBox.hasChildNodes())
-        notifyAboutResults();
+        finish(true);
 }
 
 function checkDraggedCorrectly(button) {
     return button.classList.contains("correct");
 }
 
-function notifyAboutResults() {
-    clearTimeout(timeout);
-    var correctCountNeeded = words.length;
-
-    var state = getState()
-    var difficulty = state.difficulty;
+function getAllowedErrorsCount() {
+    var difficulty = getState().difficulty;
 
     if (difficulty === "easy")
-        correctCountNeeded -= 2;
+        return 2;
     else if (difficulty === "medium")
-        correctCountNeeded -= 1;
+        return 1;
+    else
+        return 0;
+}
 
-    var result = "Неправильно. Попробуйте еще раз";
+function finish(success) {
+    clearTimeout(timeout);
+    var state = getState()
+    
+    var result = "Вы проиграли. Попробуйте еще раз";
     var allowNext = false;
 
-    if (correctCount >= correctCountNeeded)
+    if (success)
     {
         allowNext = true;
+        var points = words.length - incorrectCount;
 
-        state.lastTimePointsAdded += correctCount;
-        state.points += correctCount;
+        state.lastTimePointsAdded += points;
+        state.points += points;
         setState(state);
 
-        result = `Правильно! У вас ${correctCount} очков за уровень и ${state.points} очков всего`;
+        result = `Вы победили! У вас ${points} очков`;
         updateStats();
     }
 
@@ -130,7 +137,7 @@ async function launchFirstGameAsync() {
     $("#timer").css("display", "block");
     updateStats(0);
 
-    correctCount = 0;
+    incorrectCount = 0;
     fillWordsButtons();
 
     var secondsToFinish = 0;

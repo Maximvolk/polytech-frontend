@@ -1,6 +1,10 @@
 async function launchGameAsync() {
     closeModal();
+
     var state = getState();
+    state.lastTimePointsAdded = 0;
+    setState(state);
+    
     setPage(`game${state.currentGameNumber}`);
 
     if (state.currentGameNumber === 1)
@@ -99,21 +103,18 @@ $(document).ready(async function() {
     document.getElementById("modal-next").addEventListener("click", async () => {
         var state = getState();
         state.currentGameNumber++;
-        setState();
+        setState(state);
         
         await launchGameAsync();
     })
-    document.getElementById("start-game").addEventListener("click", async () => { await launchGameAsync(); })
+    document.getElementById("start-game").addEventListener("click", async () => {
+        await launchGameAsync();
+    })
 
     var state = getState();
 
     if (state == null) {
-        state = {
-            username: null,
-            currentPage: "login",
-            difficulty: "medium"
-        };
-
+        state = getDefaultState();
         setState(state);
         setPage("login");
     }
