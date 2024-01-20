@@ -118,3 +118,8 @@ input {
     top: 5%;
     transform: translateX(-50%);
 }
+
+#stats-box table, td, th {
+    border: 2px solid black;
+    text-align: center;
+}

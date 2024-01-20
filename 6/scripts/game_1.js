@@ -120,6 +120,8 @@ function finish(success) {
     if (success)
     {
         allowNext = true;
+        victory = true;
+        
         var points = words.length - incorrectCount;
 
         state.lastTimePointsAdded += points;
@@ -127,7 +129,8 @@ function finish(success) {
         setState(state);
 
         result = `Вы победили! У вас ${points} очков`;
-        updateStats();
+        if (updateStats())
+            result += "\nНовый рекорд!";
     }
 
     openModal(result, allowNext);
@@ -137,6 +140,7 @@ async function launchFirstGameAsync() {
     $("#timer").css("display", "block");
     updateStats(0);
 
+    victory = false;
     incorrectCount = 0;
     fillWordsButtons();
 

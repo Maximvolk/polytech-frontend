@@ -1,10 +1,12 @@
+var victory = false;
+
 async function launchGameAsync() {
     closeModal();
 
     var state = getState();
     state.lastTimePointsAdded = 0;
     setState(state);
-    
+
     setPage(`game${state.currentGameNumber}`);
 
     if (state.currentGameNumber === 1)
@@ -32,6 +34,9 @@ function setPage(pageId) {
 
     if (pageId != "game1")
         $("#timer").css("display", "none");
+
+    if (pageId === "stats")
+        fillStats();
 
     setState(state);
 }
@@ -66,6 +71,12 @@ function checkInputIsNotEmpty(element) {
 
 function backFromModal() {
     closeModal();
+
+    var state = getState();
+    if (victory && state.currentGameNumber < 3)
+        state.currentGameNumber++;
+
+    setState(state);
     setPage("menu");
 }
 
@@ -76,9 +87,10 @@ async function restartGameAsync() {
 
 async function nextGameAsync() {
     var state = getState();
-    state.currentGameNumber++;
-    setState(state);
+    if (state.currentGameNumber < 3)
+        state.currentGameNumber++;
 
+    setState(state);
     await launchGameAsync();
 }
 
@@ -90,6 +102,27 @@ function backToMenu() {
         clearTimeout(timeout);
 
     setPage('menu');
+}
+
+function fillStats() {
+    var statsBody = document.getElementById("stats-body");
+    statsBody.innerHTML = "";
+
+    var stats = getStats();
+    var statsArray = [];
+
+    for (var username in stats)
+        statsArray.push([username, stats[username]]);
+
+    statsArray.sort(function(a, b) { return b[1] - a[1]; });
+    
+    for (const [username, record] of statsArray)
+    {
+        var row = document.createElement("tr");
+        row.innerHTML = `<td>${username}</td><td>${record}</td>`;
+
+        statsBody.appendChild(row);
+    }
 }
 
 $(document).ready(async function() {

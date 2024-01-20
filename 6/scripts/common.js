@@ -20,7 +20,11 @@ function getDefaultState() {
 }
 
 function getStats() {
-    return JSON.parse(window.localStorage.getItem("stats"));
+    var stats = window.localStorage.getItem("stats");
+    if (stats == null)
+        stats = "{}";
+
+    return JSON.parse(stats);
 }
 
 function setStats(stats) {
@@ -76,10 +80,13 @@ function openModal(text, allowNext) {
 
     $("#modal-text").html("<h1>" + text + "</h1>");
     $("#modal").css("display", "block");
+
+    $("#back-to-menu").prop("disabled", true);
 }
 
 function closeModal() {
     $("#modal").css("display", "none");
+    $("#back-to-menu").prop("disabled", false);
 }
 
 function updateStats(points = null) {
@@ -89,13 +96,23 @@ function updateStats(points = null) {
     if (points == null)
         points = state.points
 
+    var newRecord = false;
+
     if (!(state.username in stats))
-        stats.username = points;
+    {
+        stats[state.username] = points;
+        if (points > 0)
+            newRecord = true;
+    }
     else
     {
-        if (state.points > stats.username)
-            stats.username = points;
+        if (state.points > stats[state.username])
+        {
+            stats[state.username] = points;
+            newRecord = true;
+        }
     }
 
     setStats(stats);
+    return newRecord;
 }
