@@ -7,13 +7,6 @@ var colours = [
     "blue", "red", "yellow", "green", "darkorange", "sienna",
     "purple", "bisque", "grey", "aquamarine", "firebrick", "deeppink", "lime"
 ]
-// var words = [
-//     "Синий",
-// ]
-
-// var colours = [
-//     "blue", "yellow"
-// ]
 
 var timeout = null;
 var incorrectCount = 0;
@@ -133,6 +126,7 @@ function finish(success) {
 }
 
 async function launchFirstGameAsync() {
+    timerStopRequested = false;
     $("#timer").css("display", "block");
 
     var state = getState();
@@ -158,5 +152,6 @@ async function launchFirstGameAsync() {
         openModal("Время вышло. Попробуйте еще раз", false);
     }, secondsToFinish * 1000);
 
+    console.log("here");
     await launchTimerAsync(secondsToFinish);
 }

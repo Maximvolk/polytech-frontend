@@ -175,5 +175,5 @@ function checkSelection() {
         victory = true;
     }
 
-    openModal(message, false);
+    openModal(message, victory);
 }

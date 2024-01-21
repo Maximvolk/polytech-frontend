@@ -55,9 +55,8 @@ async function launchTimerAsync(seconds) {
         seconds--;
         $("#timer").html(seconds);
     }
-
-    if (timerStopRequested)
-        timerStopRequested = false;
+    
+    timerStopRequested = false;
 }
 
 function stopTimer() {
@@ -72,11 +71,13 @@ function openModal(text, allowNext) {
     stopTimer();
     var state = getState();
 
-    console.log(!allowNext || state.currentGameNumber === 3);
     if (!allowNext || state.currentGameNumber === 3)
         $("#modal-next").css("display", "none");
     else
         $("#modal-next").css("display", "block");
+
+    if (allowNext && state.currentGameNumber === 3)
+        $("#modal-restart-everything").css("display", "block");
 
     $("#modal-text").html("<h1>" + text + "</h1>");
     $("#modal").css("display", "block");
@@ -87,6 +88,7 @@ function openModal(text, allowNext) {
 function closeModal() {
     $("#modal").css("display", "none");
     $("#back-to-menu").prop("disabled", false);
+    $("#modal-restart-everything").css("display", "none");
 }
 
 function updateStats() {

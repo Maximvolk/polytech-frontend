@@ -110,6 +110,10 @@ input {
     text-align: center;
 }
 
+#modal-restart-everything {
+    display: none;
+}
+
 #timer {
     position: absolute;
     font-size: 40px;

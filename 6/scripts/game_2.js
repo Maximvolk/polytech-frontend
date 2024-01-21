@@ -45,7 +45,6 @@ function clickLetter(button) {
             letterPlaceholders[i].innerText = button.innerText;
     }
 
-    console.log(letterPlaceholders.every((item) => item.innerText != ""));
     if (letterPlaceholders.every((item) => item.innerText != ""))
     {
         var points = 10 - currentHangmanPart;

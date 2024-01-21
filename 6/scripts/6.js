@@ -1,6 +1,7 @@
 var victory = false;
 
 async function launchGameAsync() {
+    victory = false;
     closeModal();
 
     var state = getState();
@@ -136,17 +137,25 @@ $(document).ready(async function() {
         setState(state);
 
         await restartGameAsync();
-    })
+    });
     document.getElementById("modal-next").addEventListener("click", async () => {
         var state = getState();
         state.currentGameNumber++;
         setState(state);
         
         await launchGameAsync();
-    })
+    });
     document.getElementById("start-game").addEventListener("click", async () => {
         await launchGameAsync();
-    })
+    });
+    document.getElementById("modal-restart-everything").addEventListener("click", async () => {
+        var state = getState();
+        state.currentGameNumber = 1;
+        state.points = 0;
+        setState(state);
+        
+        await launchGameAsync();
+    });
 
     var state = getState();
 
