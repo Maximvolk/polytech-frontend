@@ -74,10 +74,6 @@ function createWordButton(buttonColour, text, correct) {
     return button;
 }
 
-function getRandomItem(set) {
-    return [...set][Math.floor(Math.random() * set.size)];
-}
-
 function drop(e, boxType) {
     e.preventDefault();
 
@@ -121,7 +117,7 @@ function finish(success) {
     {
         allowNext = true;
         victory = true;
-        
+
         var points = words.length - incorrectCount;
 
         state.lastTimePointsAdded += points;
@@ -130,7 +126,7 @@ function finish(success) {
 
         result = `Вы победили! У вас ${points} очков`;
         if (updateStats())
-            result += "\nНовый рекорд!";
+            result += "\nВаш новый рекорд!";
     }
 
     openModal(result, allowNext);
@@ -138,14 +134,17 @@ function finish(success) {
 
 async function launchFirstGameAsync() {
     $("#timer").css("display", "block");
-    updateStats(0);
+
+    var state = getState();
+    state.points = 0;
+    setState(state);
 
     victory = false;
     incorrectCount = 0;
     fillWordsButtons();
 
     var secondsToFinish = 0;
-    var difficulty = getState().difficulty;
+    var difficulty = state.difficulty;
 
     if (difficulty === "easy")
         secondsToFinish = 59;

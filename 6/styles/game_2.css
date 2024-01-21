@@ -1,0 +1,135 @@
+#letters {
+    position: absolute;
+    max-width: 600px;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 5px;
+    justify-content: center;
+}
+
+.letter {
+    border-radius: 5px;
+    height: 40px;
+    width: 40px;
+}
+
+#word {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+#word div {
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+#hangman {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+}
+
+#hangman1 {
+    position: absolute;
+    top: 1em;
+    left: 4em;
+    width: 0.3em;
+    height: 13em;
+    background: black;
+}
+
+#hangman2 {
+    position: absolute;
+    top: 1em;
+    left: 4em;
+    width: 5.5em;
+    height: 0.3em;
+    background: black;
+}
+
+#hangman3 {
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.3em;
+    height: 2em;
+    background: black;
+}
+
+#hangman4 {
+    position: absolute;
+    top: 3em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: 0.2em solid black;
+}
+
+#hangman5 {
+    position: absolute;
+    top: 5.2em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.2em;
+    height: 3em;
+    background: black;
+}
+
+#hangman6 {
+    position: absolute;
+    top: 5.5em;
+    left: 8.7em;
+    width: 0.2em;
+    height: 1.7em;
+    transform: rotate(45deg);
+    background: black;
+}
+
+#hangman7 {
+    position: absolute;
+    top: 5.5em;
+    left: 9.9em;
+    width: 0.2em;
+    height: 1.7em;
+    transform: rotate(-45deg);
+    background: black;
+}
+
+#hangman8 {
+    position: absolute;
+    top: 7.8em;
+    left: 8.7em;
+    width: 0.2em;
+    height: 1.7em;
+    transform: rotate(45deg);
+    background: black;
+}
+
+#hangman9 {
+    position: absolute;
+    top: 7.8em;
+    left: 9.9em;
+    width: 0.2em;
+    height: 1.7em;
+    transform: rotate(-45deg);
+    background: black;
+}

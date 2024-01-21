@@ -89,30 +89,31 @@ function closeModal() {
     $("#back-to-menu").prop("disabled", false);
 }
 
-function updateStats(points = null) {
+function updateStats() {
     var state = getState();
     var stats = getStats();
-
-    if (points == null)
-        points = state.points
 
     var newRecord = false;
 
     if (!(state.username in stats))
     {
-        stats[state.username] = points;
-        if (points > 0)
+        stats[state.username] = state.points;
+        if (state.points > 0)
             newRecord = true;
     }
     else
     {
         if (state.points > stats[state.username])
         {
-            stats[state.username] = points;
+            stats[state.username] = state.points;
             newRecord = true;
         }
     }
 
     setStats(stats);
     return newRecord;
+}
+
+function getRandomItem(set) {
+    return [...set][Math.floor(Math.random() * set.size)];
 }

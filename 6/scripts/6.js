@@ -11,6 +11,8 @@ async function launchGameAsync() {
 
     if (state.currentGameNumber === 1)
         await launchFirstGameAsync();
+    else if (state.currentGameNumber === 2)
+        launchSecondGame();
 }
 
 function setPage(pageId) {
