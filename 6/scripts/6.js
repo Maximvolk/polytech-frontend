@@ -130,6 +130,40 @@ function fillStats() {
     }
 }
 
+function avoidDefault(e) {
+    e.preventDefault();
+}
+
+function processMouseDown(e, element) {
+    var coords = getCoords(element.parentElement);
+    var shiftX = e.pageX - coords.left;
+    var shiftY = e.pageY - coords.top;
+
+    moveAt(e);
+
+    function moveAt(e) {
+        element.parentElement.style.left = e.pageX - shiftX + 'px';
+        element.parentElement.style.top = e.pageY - shiftY + 'px';
+    }
+  
+    document.onmousemove = function(e) {
+        moveAt(e);
+    };
+  
+    document.onmouseup = function() {
+        document.onmousemove = null;
+        document.onmouseup = null;
+    };
+}
+
+function getCoords(element) {
+    var box = element.getBoundingClientRect();
+    return {
+        top: box.top + scrollY,
+        left: box.left + scrollX
+    };
+}
+
 $(document).ready(async function() {
     document.getElementById("modal-restart").addEventListener("click", async () => {
         var state = getState();

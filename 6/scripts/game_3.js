@@ -81,21 +81,21 @@ function highlightSelected() {
     var paragraph = document.getElementById("text-box").children[0];
 
     var currentText = paragraph.innerHTML;
-    currentText = currentText.replace(selection, "<mark>" + selection + "</mark>");
+    currentText = currentText.replace(selection, "<span class='user-selection'>" + selection + "</span>");
 
     currentText = removeNestedSelection(currentText);
     paragraph.innerHTML = currentText;
 }
 
 function removeNestedSelection(text) {
-    var parts = text.split("<mark>");
+    var parts = text.split("<span>");
     var finalParts = [parts[0]];
 
     for (var i = 1; i < parts.length; i++)
     {
-        finalParts.push("<mark>");
+        finalParts.push("<span>");
 
-        var innerParts = parts[i].split("</mark>");
+        var innerParts = parts[i].split("</span>");
         finalParts.push(innerParts[0]);
 
         if (innerParts.length === 1)   
@@ -103,7 +103,7 @@ function removeNestedSelection(text) {
 
         for (var j = 1; j < innerParts.length; j++)
         {
-            finalParts.push("</mark>");
+            finalParts.push("</span>");
             finalParts.push(innerParts[j]);
         }
     }
@@ -113,14 +113,14 @@ function removeNestedSelection(text) {
 
     for (var part of finalParts)
     {
-        if (part === "</mark>")
+        if (part === "</span>")
         {
             if (highlightStack === 1)
                 result += part;
             
             highlightStack--;
         }
-        else if (part === "<mark>")
+        else if (part === "<span>")
         {
             if (highlightStack === 0)
                 result += part;
@@ -145,11 +145,18 @@ function checkSelection() {
     var correctCount = 0;
     var correctHighlights = Object.keys(answers[currentTextIndex]);
 
-    for (var highlight of doc.getElementsByTagName("mark"))
+    for (var highlight of doc.getElementsByTagName("span"))
     {
         if (correctHighlights.includes(highlight.innerText))
+        {
             correctCount++;
+            highlight.className = "correct-selection";
+        }
+        else
+            highlight.className = "incorrect-selection";
     }
+
+    $("#text-box").html(doc.documentElement.innerHTML);
 
     var correctCountNeeded = 0;
     var state = getState();
@@ -161,7 +168,7 @@ function checkSelection() {
     else
         correctCountNeeded = 3;
 
-    var message = "Вы проиграли. Попробуйте еще раз";
+    var message = `Вы проиграли. Необходимо отгадать как минимум ${correctCountNeeded}`;
     if (correctCount >= correctCountNeeded)
     {
         state.points += correctCount;

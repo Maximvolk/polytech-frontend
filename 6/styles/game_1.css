@@ -1,6 +1,6 @@
 #game1-box {
     position: absolute;
-    width: 600px;
+    max-width: 60%;
     height: 400px;
     left: 50%;
     top: 50%;
@@ -33,11 +33,14 @@
     border-radius: 20px;
     height: 100px;
     width: 200px;
-    top: 60%;
+    top: 70%;
     display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.drag-box button {
+    max-height: 30px;
 }
 
 .box-text {
@@ -48,10 +51,26 @@
 
 #correct-box {
     background: #F4F9E9;
-    left: 20%;
+    left: 10%;
+    width: 35%;
+    height: 25%;
 }
 
 #incorrect-box {
     background: #F8A9A9;
-    left: 65%;
+    left: 55%;
+    width: 35%;
+    height: 25%;
+}
+
+#correct-title {
+    position: absolute;
+    left: 10%;
+    top: 60%;
+}
+
+#incorrect-title {
+    position: absolute;
+    left: 55%;
+    top: 60%;
 }

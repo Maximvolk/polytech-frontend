@@ -17,8 +17,8 @@
         <button id="back-to-menu" onclick="backToMenu()">Меню</button>
         <div id="timer"></div>
 
-        <div id="modal">
-            <div id="modal-text"></div>
+        <div class="prevent-select" id="modal">
+            <div id="modal-text" onmousedown="processMouseDown(event, this)" ondragstart="avoidDefault(event)"></div>
             <div id="modal-button-box">
                 <button class="modal-button" id="modal-back" onclick="backFromModal()">Меню</button>
                 <button class="modal-button" id="modal-restart">Заново</button>
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="page" id="menu">
+        <div class="page prevent-select" id="menu">
             <div id="menu-box">
                 <button id="start-game" class="menu-button">Играть</button>
                 <button class="menu-button" onclick="setPage('stats')">Рейтинг</button>
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="page" id="stats">
+        <div class="page prevent-select" id="stats">
             <div id="stats-box">
                 <h1 class="centered-title">Лучшие результаты</h1>
                 <table id="records-table">
@@ -73,20 +73,20 @@
             </div>
         </div>
 
-        <div class="page" id="game1">
+        <div class="page prevent-select" id="game1">
             <div id="game1-box">
                 <h1 class="centered-title" id="game1-title">Распределите элементы с помощью перетаскивания</h1>
                 <div id="coloured-words"></div>
             </div>
-            <div class="drag-box" id="correct-box" ondrop="drop(event, true)" ondragover="preventDefaultEventHandling(event)">
-                <h3>Цвет элемента совпадает с названием</h3>
-            </div>
-            <div class="drag-box" id="incorrect-box" ondrop="drop(event, false)" ondragover="preventDefaultEventHandling(event)">
-                <h3>Цвет элемента не совпадает с названием</h3>
-            </div>
+
+            <h3 id="correct-title">Цвет элемента совпадает с названием</h3>
+            <div class="drag-box" id="correct-box" ondrop="drop(event, true)" ondragover="preventDefaultEventHandling(event)"></div>
+
+            <h3 id="incorrect-title">Цвет элемента не совпадает с названием</h3>
+            <div class="drag-box" id="incorrect-box" ondrop="drop(event, false)" ondragover="preventDefaultEventHandling(event)"></div>
         </div>
 
-        <div class="page" id="game2">
+        <div class="page prevent-select" id="game2">
             <h1 class="centered-title">Виселица</h1>
             <div id="hangman">
                 <div id="hangman1"></div>
@@ -138,7 +138,7 @@
         </div>
 
         <div class="page" id="game3">
-            <h1 class="centered-title">Выделите в тексте неподходящие слова</h1>
+            <h1 class="centered-title prevent-select">Выделите в тексте 3 неподходящие слова</h1>
             <div id="text-box" onmouseup="highlightSelected()"></div>
             <div id="actions-box">
                 <button onclick="clearSelection()">Очистить</button>

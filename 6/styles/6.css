@@ -78,11 +78,11 @@ input {
 
 #modal {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: 50%;
+    top: 5%;
+    left: 5%;
+    /* transform: translate(-50%, -50%); */
+    width: 30%;
+    height: 35%;
     background-color: white;
     border-radius: 5px;
     border: 2px solid black;
@@ -127,3 +127,9 @@ input {
     border: 2px solid black;
     text-align: center;
 }
+
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }

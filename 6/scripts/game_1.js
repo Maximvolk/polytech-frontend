@@ -1,3 +1,5 @@
+var gameEnded = false;
+
 var words = [
     "Синий", "Красный", "Желтый", "Зеленый", "Оранжевый", "Коричневый",
     "Фиолетовый", "Бежевый", "Серый", "Бирюзовый", "Бордовый", "Розовый", "Салатовый"
@@ -68,11 +70,19 @@ function createWordButton(buttonColour, text, correct) {
 }
 
 function drop(e, boxType) {
+    if (gameEnded)
+        return;
+    
     e.preventDefault();
 
     var button = document.getElementById(e.dataTransfer.getData("text"));
     var colouredWordsBox = document.getElementById("coloured-words");
     colouredWordsBox.removeChild(button);
+
+    if (boxType)
+        document.getElementById("correct-box").appendChild(button);
+    else
+        document.getElementById("incorrect-box").appendChild(button);
 
     if (boxType != checkDraggedCorrectly(button))
         incorrectCount++;
@@ -103,7 +113,7 @@ function finish(success) {
     clearTimeout(timeout);
     var state = getState()
     
-    var result = "Вы проиграли. Попробуйте еще раз";
+    var result = `Вы проиграли. Допускается ${getAllowedErrorsCount()} ошибка(и)`;
     var allowNext = false;
 
     if (success)
@@ -129,12 +139,17 @@ async function launchFirstGameAsync() {
     timerStopRequested = false;
     $("#timer").css("display", "block");
 
+    document.getElementById("correct-box").innerHTML = "";
+    document.getElementById("incorrect-box").innerHTML = "";
+
     var state = getState();
     state.points = 0;
     setState(state);
 
     victory = false;
     incorrectCount = 0;
+    gameEnded = false;
+
     fillWordsButtons();
 
     var secondsToFinish = 0;
@@ -149,6 +164,7 @@ async function launchFirstGameAsync() {
 
     timeout = setTimeout(() => {
         $("#timer").css("display", "none");
+        gameEnded = true;
         openModal("Время вышло. Попробуйте еще раз", false);
     }, secondsToFinish * 1000);
 
